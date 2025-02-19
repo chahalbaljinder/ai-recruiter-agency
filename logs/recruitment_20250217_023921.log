@@ -1,0 +1,91 @@
+2025-02-17 02:39:35,567 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-02-17 02:39:35,570 - AI_Recruiter - ERROR - Error processing resume: Error code: 404 - {'error': {'message': 'model "llama3.2" not found, try pulling it first', 'type': 'api_error', 'param': None, 'code': None}}
+2025-02-17 02:39:35,571 - AI_Recruiter - ERROR - Processing error: Error code: 404 - {'error': {'message': 'model "llama3.2" not found, try pulling it first', 'type': 'api_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+  File "C:\Users\balli\Downloads\disposables\recruiter-agency-main\ai-recruiter-agency-main\ai-recruiter-agency\app.py", line 128, in main
+    result = asyncio.run(process_resume(file_path))
+  File "C:\Users\balli\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\balli\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\balli\AppData\Local\Programs\Python\Python313\Lib\asyncio\base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\balli\Downloads\disposables\recruiter-agency-main\ai-recruiter-agency-main\ai-recruiter-agency\app.py", line 58, in process_resume
+    return await orchestrator.process_application(resume_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\balli\Downloads\disposables\recruiter-agency-main\ai-recruiter-agency-main\ai-recruiter-agency\agents\orchestrator.py", line 46, in process_application
+    extracted_data = await self.extractor.run(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+        [{"role": "user", "content": str(resume_data)}]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\balli\Downloads\disposables\recruiter-agency-main\ai-recruiter-agency-main\ai-recruiter-agency\agents\extractor_agent.py", line 27, in run
+    extracted_info = self._query_ollama(raw_text)
+  File "C:\Users\balli\Downloads\disposables\recruiter-agency-main\ai-recruiter-agency-main\ai-recruiter-agency\agents\base_agent.py", line 22, in _query_ollama
+    response = self.ollama_client.chat.completions.create(
+        model="llama3.2",  # Updated to llama3.2
+    ...<5 lines>...
+        max_tokens=2000,
+    )
+  File "C:\Users\balli\AppData\Local\Programs\Python\Python313\Lib\site-packages\openai\_utils\_utils.py", line 279, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\balli\AppData\Local\Programs\Python\Python313\Lib\site-packages\openai\resources\chat\completions\completions.py", line 879, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<40 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\balli\AppData\Local\Programs\Python\Python313\Lib\site-packages\openai\_base_client.py", line 1290, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\balli\AppData\Local\Programs\Python\Python313\Lib\site-packages\openai\_base_client.py", line 967, in request
+    return self._request(
+           ~~~~~~~~~~~~~^
+        cast_to=cast_to,
+        ^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        retries_taken=retries_taken,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\balli\AppData\Local\Programs\Python\Python313\Lib\site-packages\openai\_base_client.py", line 1071, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.NotFoundError: Error code: 404 - {'error': {'message': 'model "llama3.2" not found, try pulling it first', 'type': 'api_error', 'param': None, 'code': None}}
+2025-02-17 02:41:24,965 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:41:40,272 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:42:25,728 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:42:57,761 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:42:57,772 - AI_Recruiter - ERROR - Processing error: 'charmap' codec can't encode character '\u25cf' in position 1084: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\Users\balli\Downloads\disposables\recruiter-agency-main\ai-recruiter-agency-main\ai-recruiter-agency\app.py", line 202, in main
+    f.write(str(result))
+    ~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\balli\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u25cf' in position 1084: character maps to <undefined>
+2025-02-17 02:47:53,576 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:48:07,794 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:48:59,654 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:50:14,815 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:50:23,981 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:50:44,545 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:51:50,012 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:53:14,020 - httpx - INFO - HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-17 02:53:14,032 - AI_Recruiter - ERROR - Processing error: 'charmap' codec can't encode character '\u25cf' in position 1084: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\Users\balli\Downloads\disposables\recruiter-agency-main\ai-recruiter-agency-main\ai-recruiter-agency\app.py", line 202, in main
+    f.write(str(result))
+    ~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\balli\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u25cf' in position 1084: character maps to <undefined>
