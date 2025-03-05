@@ -20,7 +20,7 @@ class ScreenerAgent(BaseAgent):
         print("👥 Screener: Conducting initial screening")
 
         workflow_context = eval(messages[-1]["content"])
-        screening_results = self._query_ollama(str(workflow_context))
+        screening_results = self._query_gemini(str(workflow_context))
 
         return {
             "screening_report": screening_results,

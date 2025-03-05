@@ -24,7 +24,7 @@ class ExtractorAgent(BaseAgent):
             raw_text = resume_data.get("text", "")
 
         # Get structured information from Ollama
-        extracted_info = self._query_ollama(raw_text)
+        extracted_info = self._query_gemini(raw_text)
 
         return {
             "raw_text": raw_text,

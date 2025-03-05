@@ -44,7 +44,7 @@ class AnalyzerAgent(BaseAgent):
         Return ONLY the JSON object, no other text.
         """
 
-        analysis_results = self._query_ollama(analysis_prompt)
+        analysis_results = self._query_gemini(analysis_prompt)
         parsed_results = self._parse_json_safely(analysis_results)
 
         # Ensure we have valid data even if parsing fails

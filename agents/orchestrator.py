@@ -28,7 +28,7 @@ class OrchestratorAgent(BaseAgent):
     async def run(self, messages: list) -> Dict[str, Any]:
         """Process a single message through the agent"""
         prompt = messages[-1]["content"]
-        response = self._query_ollama(prompt)
+        response = self._query_gemini(prompt)
         return self._parse_json_safely(response)
 
     async def process_application(self, resume_data: Dict[str, Any]) -> Dict[str, Any]:

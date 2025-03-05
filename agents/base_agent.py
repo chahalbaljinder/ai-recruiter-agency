@@ -1,36 +1,34 @@
 from typing import Dict, Any
 import json
-from openai import OpenAI
+import google.generativeai as genai
+import os
 
 
 class BaseAgent:
     def __init__(self, name: str, instructions: str):
+        gemini_api_key = os.getenv("GEMINI_API_KEY")
         self.name = name
         self.instructions = instructions
-        self.ollama_client = OpenAI(
-            base_url="http://localhost:11434/v1",
-            api_key="ollama",  # required but unused
-        )
+        genai.configure(api_key=gemini_api_key)
+        self.model = genai.GenerativeModel("gemini-2.0-flash")
 
     async def run(self, messages: list) -> Dict[str, Any]:
         """Default run method to be overridden by child classes"""
         raise NotImplementedError("Subclasses must implement run()")
 
-    def _query_ollama(self, prompt: str) -> str:
-        """Query Ollama model with the given prompt"""
+    def _query_gemini(self, prompt: str) -> str:
+        """Query Gemini model with the given prompt"""
         try:
-            response = self.ollama_client.chat.completions.create(
-                model="llama3.2:1b",  # Updated to llama3.2
-                messages=[
-                    {"role": "system", "content": self.instructions},
-                    {"role": "user", "content": prompt},
-                ],
-                temperature=0.7,
-                max_tokens=2000,
+            response = self.model.generate_content(
+                self.instructions + prompt,
+                generation_config=genai.types.GenerationConfig(
+                    temperature=0.7,
+                    max_output_tokens=2000,
+                ),
             )
-            return response.choices[0].message.content
+            return response.text
         except Exception as e:
-            print(f"Error querying Ollama: {str(e)}")
+            print(f"Error querying Gemini: {str(e)}")
             raise
 
     def _parse_json_safely(self, text: str) -> Dict[str, Any]:
